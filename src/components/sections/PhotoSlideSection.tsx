@@ -12,6 +12,7 @@ export interface PhotoSlideItem {
   alt: string;
   caption: string;
   quote: string;
+  verseRef?: string; // referensi ayat Alkitab, misal "1 Timotius 4:12 (TB)"
   badge: {
     icon: string;
     label: string;

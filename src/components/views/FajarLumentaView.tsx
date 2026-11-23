@@ -4,7 +4,6 @@ import { BirthdayLayout } from "@/components/layouts/BirthdayLayout";
 import { PageWrapper } from "@/components/layouts/PageWrapper";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { PhotoSlideSection, PhotoSlideItem } from "@/components/sections/PhotoSlideSection";
-import { WishSection, WishItem } from "@/components/sections/WishSection";
 import { ConfettiParticle } from "@/components/elements/ConfettiParticle";
 import { MusicPlayer } from "@/components/fragments/MusicPlayer";
 
@@ -14,7 +13,9 @@ const defaultSlides: PhotoSlideItem[] = [
     src: "/images/fajar/1.jpg",
     alt: "Fajar Lumenta - Sang Penatua Muda",
     caption: "Sang Penatua Muda",
-    quote: "Kepemimpinan sejati lahir dari hati yang melayani.",
+    quote:
+      "Jangan seorang pun menganggap engkau rendah karena engkau muda. Jadilah teladan bagi orang-orang percaya, dalam perkataanmu, dalam tingkah lakumu, dalam kasihmu, dalam kesetiaanmu dan dalam kesucianmu.",
+    verseRef: "1 Timotius 4:12 (TB)",
     badge: {
       icon: "🕊️",
       label: "Penatua Pemuda",
@@ -26,7 +27,8 @@ const defaultSlides: PhotoSlideItem[] = [
     src: "/images/fajar/2.jpg",
     alt: "Fajar Lumenta - Di Balik Ketegasan",
     caption: "Di Balik Ketegasan",
-    quote: "Guru terbaik bukan yang tak pernah marah, tapi yang marahnya penuh kasih.",
+    quote: "Besi menajamkan besi, orang menajamkan sesamanya.",
+    verseRef: "Amsal 27:17 (TB)",
     badge: {
       icon: "📐",
       label: "Guru Matematika",
@@ -38,7 +40,9 @@ const defaultSlides: PhotoSlideItem[] = [
     src: "/images/fajar/3.jpg",
     alt: "Fajar Lumenta - Momen Bersama",
     caption: "Momen Bersama",
-    quote: "Hidup paling bermakna saat dirayakan bersama orang-orang yang kita cintai.",
+    quote:
+      "Sungguh, alangkah baiknya dan indahnya, apabila saudara-saudara diam bersama dengan rukun!",
+    verseRef: "Mazmur 133:1 (TB)",
     badge: {
       icon: "🎉",
       label: "Momen Spesial",
@@ -50,7 +54,9 @@ const defaultSlides: PhotoSlideItem[] = [
     src: "/images/fajar/4.jpg",
     alt: "Fajar Lumenta - Langkah Iman",
     caption: "Langkah Iman",
-    quote: "Setiap tanggung jawab baru adalah kepercayaan Tuhan yang digenapkan.",
+    quote:
+      "Sebab Aku ini mengetahui rancangan-rancangan apa yang ada pada-Ku mengenai kamu, demikianlah firman TUHAN, yaitu rancangan damai sejahtera dan bukan rancangan kecelakaan, untuk memberikan kepadamu hari depan yang penuh harapan.",
+    verseRef: "Yeremia 29:11 (TB)",
     badge: {
       icon: "✝️",
       label: "Iman & Pelayanan",
@@ -62,7 +68,9 @@ const defaultSlides: PhotoSlideItem[] = [
     src: "/images/fajar/5.jpg",
     alt: "Fajar Lumenta - Fajar yang Sesungguhnya",
     caption: "Fajar yang Sesungguhnya",
-    quote: "Namamu bukan kebetulan — kamu memang selalu jadi awal dari hal-hal baik.",
+    quote:
+      "Tak berkesudahan kasih setia TUHAN, tak habis-habisnya rahmat-Nya, selalu baru tiap pagi; besar kesetiaan-Mu!",
+    verseRef: "Ratapan 3:22-23 (TB)",
     badge: {
       icon: "🌅",
       label: "Fajar Baru",
@@ -74,51 +82,14 @@ const defaultSlides: PhotoSlideItem[] = [
     src: "/images/fajar/6.jpg",
     alt: "Fajar Lumenta - Selamat Ulang Tahun!",
     caption: "Selamat Ulang Tahun!",
-    quote: "Semoga usiamu bertambah, ilmumu semakin tajam, dan hatimu tetap hangat.",
+    quote:
+      "Terpujilah Tuhan! Hari demi hari Ia menanggung bagi kita; Allah adalah keselamatan kita.",
+    verseRef: "Mazmur 68:19 (TB)",
     badge: {
       icon: "🎂",
       label: "HBD Fajar!",
       variant: "pink",
     },
-  },
-];
-
-const defaultWishes: WishItem[] = [
-  {
-    id: "1",
-    sender: "Keluarga & Sahabat",
-    relation: "Dengan Penuh Kasih",
-    message:
-      "Selamat ulang tahun Fajar! Semoga senantiasa diberikan kesehatan yang prima, kebahagiaan tak bertepi, dan kemudahan dalam setiap urusan serta impianmu.",
-    emoji: "💖",
-    colorTheme: "pink",
-  },
-  {
-    id: "2",
-    sender: "Rekan & Teman Seperjuangan",
-    relation: "Kolega & Sahabat",
-    message:
-      "Barakallah fii umrik Fajar! Teruslah berkarya, menjadi pribadi yang rendah hati, dan inspiratif. Semoga tahun ini penuh lompatan karier dan prestasi luar biasa!",
-    emoji: "🚀",
-    colorTheme: "lavender",
-  },
-  {
-    id: "3",
-    sender: "Lingkaran Hangat",
-    relation: "Besties",
-    message:
-      "Happy birthday Fajar Lumenta! Tetap jadi sosok yang humble, asik, dan selalu menebarkan vibe positif di mana pun berada. Hari ini hari rayamu!",
-    emoji: "🎂",
-    colorTheme: "yellow",
-  },
-  {
-    id: "4",
-    sender: "Doa Tulus Semesta",
-    relation: "Harapan Terbaik",
-    message:
-      "Semoga setiap langkah kakimu dimudahkan, setiap niat baikmu dibukakan pintu selebar-lebarnya, dan selalu dikelilingi orang-orang yang tulus mencintaimu.",
-    emoji: "🌟",
-    colorTheme: "mint",
   },
 ];
 
@@ -149,12 +120,8 @@ export default function FajarLumentaView() {
       {/* Photo Slide Section - full-width scroll-snap outside PageWrapper */}
       <PhotoSlideSection slides={defaultSlides} />
 
-      {/* Bottom section wrapped in PageWrapper */}
+      {/* Footer */}
       <PageWrapper>
-        {/* Wish Section */}
-        <WishSection wishes={defaultWishes} />
-
-        {/* Footer */}
         <footer className="mt-16 pt-8 border-t border-pink-100 text-center text-xs md:text-sm text-[#7B6B9A] pb-10">
           <p>
             Dibuat dengan cinta dan penuh doa untuk{" "}

@@ -63,15 +63,20 @@ export function PhotoSlide({ slide, isActive = false, priority = false, onPhotoC
             </Typography>
           </div>
 
-          {/* Quote (Nunito italic) - Delay ~300ms */}
+          {/* Quote (ayat Alkitab, Nunito italic) + Referensi ayat — Delay ~300ms */}
           <div className={isActive ? "animate-slide-quote" : "opacity-0 translate-y-5"}>
             <Typography
               as="p"
               variant="body"
-              className="text-base sm:text-lg md:text-xl font-nunito italic text-[#5B4775] leading-relaxed max-w-xl"
+              className="text-sm sm:text-base md:text-lg font-nunito italic text-[#5B4775] leading-relaxed max-w-xl"
             >
               &ldquo;{slide.quote}&rdquo;
             </Typography>
+            {slide.verseRef && (
+              <p className="mt-1 text-xs sm:text-sm font-nunito text-[#7B6B9A] text-right max-w-xl mx-auto pr-1">
+                — {slide.verseRef}
+              </p>
+            )}
           </div>
         </div>
       </div>
