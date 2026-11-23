@@ -3,15 +3,17 @@
 import React, { useRef, useState, useEffect, useCallback } from "react";
 import { PhotoSlide, PhotoSlideItem } from "@/components/fragments/PhotoSlide";
 import { SlideNavigator } from "@/components/fragments/SlideNavigator";
+import { PhotoLightbox } from "@/components/fragments/PhotoLightbox";
 
 export interface PhotoSlideSectionProps {
   slides: PhotoSlideItem[];
-  onPhotoClick?: (index: number) => void;
 }
 
-export function PhotoSlideSection({ slides, onPhotoClick }: PhotoSlideSectionProps) {
+export function PhotoSlideSection({ slides }: PhotoSlideSectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [lightboxOpen, setLightboxOpen] = useState<boolean>(false);
+  const [lightboxIndex, setLightboxIndex] = useState<number>(0);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -53,8 +55,16 @@ export function PhotoSlideSection({ slides, onPhotoClick }: PhotoSlideSectionPro
 
     if (targetSlide) {
       targetSlide.scrollIntoView({ behavior: "smooth" });
-      setActiveIndex(index);
     }
+  }, []);
+
+  const handlePhotoClick = useCallback((index: number) => {
+    setLightboxIndex(index);
+    setLightboxOpen(true);
+  }, []);
+
+  const handleCloseLightbox = useCallback(() => {
+    setLightboxOpen(false);
   }, []);
 
   return (
@@ -74,7 +84,7 @@ export function PhotoSlideSection({ slides, onPhotoClick }: PhotoSlideSectionPro
             slide={slide}
             isActive={activeIndex === index}
             priority={index === 0}
-            onPhotoClick={() => onPhotoClick?.(index)}
+            onPhotoClick={() => handlePhotoClick(index)}
           />
         ))}
       </section>
@@ -85,6 +95,14 @@ export function PhotoSlideSection({ slides, onPhotoClick }: PhotoSlideSectionPro
         activeIndex={activeIndex}
         captions={slides.map((s) => s.caption)}
         onNavigate={handleNavigate}
+      />
+
+      {/* Photo Lightbox */}
+      <PhotoLightbox
+        slides={slides}
+        initialIndex={lightboxIndex}
+        isOpen={lightboxOpen}
+        onClose={handleCloseLightbox}
       />
     </div>
   );
