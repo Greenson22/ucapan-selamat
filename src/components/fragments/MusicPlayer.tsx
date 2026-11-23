@@ -40,7 +40,7 @@ export function MusicPlayer({ src = "/audio/happy-birthday.mp3", autoPlay = fals
   };
 
   return (
-    <div className="fixed bottom-5 right-5 z-40">
+    <div className="fixed bottom-3 right-3 sm:bottom-5 sm:right-5 z-40">
       <audio
         ref={audioRef}
         src={src}
