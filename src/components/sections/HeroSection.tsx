@@ -61,7 +61,7 @@ export function HeroSection({
         >
           Happy Birthday,
           <br />
-          <span>{name}!</span>
+          <span>{name}, S.Pd.!</span>
         </Typography>
 
         <Typography
@@ -87,12 +87,12 @@ export function HeroSection({
           type="button"
           onClick={onExploreClick}
           aria-label="Lihat galeri foto kenangan"
-          className="group flex flex-col items-center gap-1.5 text-xs font-bold text-[#5C2D9A] hover:text-[#3B1A6B] transition-all cursor-pointer focus:outline-hidden"
+          className="group flex flex-col items-center gap-2 text-sm sm:text-base md:text-lg font-extrabold text-[#5C2D9A] hover:text-[#3B1A6B] transition-all cursor-pointer focus:outline-hidden"
         >
-          <span className="bg-white/80 backdrop-blur-xs border border-[#A97DE8]/30 px-3.5 py-1.5 rounded-full shadow-xs group-hover:shadow-md transition-all">
+          <span className="bg-white/95 hover:bg-white backdrop-blur-md border-2 border-[#A97DE8]/60 px-5 sm:px-7 py-2.5 sm:py-3.5 rounded-full shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all text-[#3B1A6B] flex items-center gap-2">
             Lihat Kenangan Foto 📸
           </span>
-          <span className="animate-bounce text-base md:text-lg">↓</span>
+          <span className="animate-bounce text-xl md:text-2xl font-bold">↓</span>
         </button>
       </footer>
     </article>

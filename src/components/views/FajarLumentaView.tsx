@@ -208,29 +208,9 @@ export default function FajarLumentaView() {
                 isActive={activeIndex === index + 1}
                 priority={index === 0}
                 onPhotoClick={() => handlePhotoClick(index)}
+                onBackToTop={index === defaultSlides.length - 1 ? () => handleNavigate(0) : undefined}
               />
             ))}
-
-            {/* Footer Section */}
-            <article
-              data-slide-id="footer"
-              className="w-full snap-end flex flex-col justify-center items-center py-12 px-4 text-center border-t border-[#A97DE8]/30 bg-white/40 backdrop-blur-xs"
-            >
-              <p className="text-xs md:text-sm text-[#7B4FC4] max-w-md mx-auto">
-                Dibuat dengan cinta dan penuh doa untuk{" "}
-                <span className="font-bold text-[#3B1A6B]">Fajar Lumenta</span>.
-              </p>
-              <p className="mt-2 text-xs text-[#9B82C4]">
-                © 2026 Ucapan Selamat Digital — Pemuda GMIM.
-              </p>
-              <button
-                type="button"
-                onClick={() => handleNavigate(0)}
-                className="mt-6 inline-flex items-center gap-1.5 text-xs font-bold text-[#5C2D9A] hover:text-[#3B1A6B] bg-white/80 border border-[#A97DE8]/30 px-4 py-2 rounded-full shadow-xs transition-colors"
-              >
-                ↑ Kembali ke Awal
-              </button>
-            </article>
           </main>
 
           {/* Vertical Dot Navigator */}

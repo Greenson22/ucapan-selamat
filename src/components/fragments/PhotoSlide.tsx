@@ -6,6 +6,7 @@ export interface PhotoSlideProps {
   isActive?: boolean;
   priority?: boolean;
   onPhotoClick?: () => void;
+  onBackToTop?: () => void;
 }
 
 export type { PhotoSlideItem };
@@ -17,7 +18,7 @@ import Image from "next/image";
 import { Badge } from "@/components/elements/Badge";
 import { Typography } from "@/components/elements/Typography";
 
-export function PhotoSlide({ slide, isActive = false, priority = false, onPhotoClick }: PhotoSlideProps) {
+export function PhotoSlide({ slide, isActive = false, priority = false, onPhotoClick, onBackToTop }: PhotoSlideProps) {
   return (
     <article
       data-slide-id={slide.id}
@@ -78,6 +79,19 @@ export function PhotoSlide({ slide, isActive = false, priority = false, onPhotoC
               </p>
             )}
           </div>
+
+          {/* Tombol kembali ke awal di slide terakhir */}
+          {onBackToTop && (
+            <div className={`mt-2 ${isActive ? "animate-slide-quote" : "opacity-0 translate-y-5"}`}>
+              <button
+                type="button"
+                onClick={onBackToTop}
+                className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#5C2D9A] hover:text-[#3B1A6B] bg-white/90 border border-[#A97DE8]/40 px-4 py-2 rounded-full shadow-xs hover:shadow-md transition-all cursor-pointer"
+              >
+                ↑ Kembali ke Awal
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </article>
