@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
-import { PhotoSlide as PhotoSlideFragment, PhotoSlide } from "@/components/fragments/PhotoSlide";
+import { PhotoSlide, PhotoSlideItem } from "@/components/fragments/PhotoSlide";
 
 export interface PhotoSlideSectionProps {
-  slides: PhotoSlide[];
+  slides: PhotoSlideItem[];
   onPhotoClick?: (index: number) => void;
 }
 
@@ -54,10 +54,11 @@ export function PhotoSlideSection({ slides, onPhotoClick }: PhotoSlideSectionPro
       }}
     >
       {slides.map((slide, index) => (
-        <PhotoSlideFragment
+        <PhotoSlide
           key={slide.id}
           slide={slide}
           isActive={activeIndex === index}
+          priority={index === 0}
           onPhotoClick={() => onPhotoClick?.(index)}
         />
       ))}

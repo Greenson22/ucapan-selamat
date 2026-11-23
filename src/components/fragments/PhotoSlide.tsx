@@ -1,9 +1,9 @@
 import React from "react";
 import Image from "next/image";
-import { Badge } from "@/components/elements/Badge";
+import { Badge, BadgeVariant } from "@/components/elements/Badge";
 import { Typography } from "@/components/elements/Typography";
 
-export interface PhotoSlide {
+export interface PhotoSlideItem {
   id: string;
   src: string;
   alt: string;
@@ -12,19 +12,21 @@ export interface PhotoSlide {
   badge: {
     icon: string;
     label: string;
-    variant: "pink" | "lavender" | "mint" | "yellow" | "peach";
+    variant: BadgeVariant;
   };
 }
 
-export type PhotoSlideData = PhotoSlide;
+export type PhotoSlide = PhotoSlideItem;
+export type PhotoSlideData = PhotoSlideItem;
 
 export interface PhotoSlideProps {
-  slide: PhotoSlideData;
+  slide: PhotoSlideItem;
   isActive?: boolean;
+  priority?: boolean;
   onPhotoClick?: () => void;
 }
 
-export function PhotoSlide({ slide, isActive, onPhotoClick }: PhotoSlideProps) {
+export function PhotoSlide({ slide, isActive = false, priority = false, onPhotoClick }: PhotoSlideProps) {
   return (
     <article
       data-slide-id={slide.id}
@@ -34,48 +36,52 @@ export function PhotoSlide({ slide, isActive, onPhotoClick }: PhotoSlideProps) {
       <div
         onClick={onPhotoClick}
         className={`relative w-full h-[60vh] max-h-[60vh] overflow-hidden bg-pink-50/50 cursor-pointer group transition-all duration-300 ${
-          onPhotoClick ? "hover:opacity-95" : ""
-        }`}
+          isActive ? "animate-slide-enter" : "opacity-0 translate-y-6"
+        } ${onPhotoClick ? "hover:opacity-95" : ""}`}
       >
         <Image
           src={slide.src}
           alt={slide.alt}
           fill
-          priority
+          priority={priority}
           sizes="(max-width: 768px) 100vw, 80vw"
           className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent pointer-events-none" />
-
-        {/* Badge in image area (bottom left or top right) */}
-        <div className="absolute bottom-4 left-4 sm:left-6 z-10">
-          <Badge variant={slide.badge.variant} className="shadow-md backdrop-blur-md bg-white/90">
-            <span>{slide.badge.icon}</span>
-            <span>{slide.badge.label}</span>
-          </Badge>
-        </div>
       </div>
 
       {/* 40vh Text Content Area */}
       <div className="w-full h-[40vh] max-h-[40vh] flex flex-col justify-center items-center text-center px-6 sm:px-12 md:px-16 lg:px-24 py-4 md:py-6 bg-gradient-to-b from-transparent via-[#FFF9FC]/70 to-[#FFF9FC]">
         <div className="max-w-2xl mx-auto flex flex-col items-center gap-3">
-          {/* Caption (Pacifico) */}
-          <Typography
-            as="h2"
-            variant="heading"
-            className="text-2xl sm:text-3xl md:text-4xl text-[#3D2C52] drop-shadow-xs"
-          >
-            {slide.caption}
-          </Typography>
+          {/* Badge Peran */}
+          <div className={isActive ? "animate-slide-badge" : "opacity-0 translate-y-3"}>
+            <Badge variant={slide.badge.variant} className="shadow-xs backdrop-blur-xs">
+              <span>{slide.badge.icon}</span>
+              <span>{slide.badge.label}</span>
+            </Badge>
+          </div>
 
-          {/* Quote (Nunito italic) */}
-          <Typography
-            as="p"
-            variant="body"
-            className="text-base sm:text-lg md:text-xl font-nunito italic text-[#5B4775] leading-relaxed max-w-xl"
-          >
-            &ldquo;{slide.quote}&rdquo;
-          </Typography>
+          {/* Caption (Pacifico) - Delay ~150ms */}
+          <div className={isActive ? "animate-slide-caption" : "opacity-0 translate-y-5"}>
+            <Typography
+              as="h2"
+              variant="heading"
+              className="text-2xl sm:text-3xl md:text-4xl text-[#3D2C52] drop-shadow-xs"
+            >
+              {slide.caption}
+            </Typography>
+          </div>
+
+          {/* Quote (Nunito italic) - Delay ~300ms */}
+          <div className={isActive ? "animate-slide-quote" : "opacity-0 translate-y-5"}>
+            <Typography
+              as="p"
+              variant="body"
+              className="text-base sm:text-lg md:text-xl font-nunito italic text-[#5B4775] leading-relaxed max-w-xl"
+            >
+              &ldquo;{slide.quote}&rdquo;
+            </Typography>
+          </div>
         </div>
       </div>
     </article>

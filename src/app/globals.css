@@ -79,6 +79,44 @@
   animation: pulse-subtle 2.5s ease-in-out infinite;
 }
 
+@keyframes slide-fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-text-appear {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-enter {
+  animation: slide-fade-in-up 500ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-caption {
+  animation: slide-text-appear 500ms cubic-bezier(0.16, 1, 0.3, 1) 150ms forwards;
+}
+
+.animate-slide-quote {
+  animation: slide-text-appear 500ms cubic-bezier(0.16, 1, 0.3, 1) 300ms forwards;
+}
+
+.animate-slide-badge {
+  animation: slide-text-appear 400ms cubic-bezier(0.16, 1, 0.3, 1) 200ms forwards;
+}
+
 /* Responsive & reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {

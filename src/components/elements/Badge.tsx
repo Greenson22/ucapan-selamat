@@ -1,8 +1,10 @@
 import React from "react";
 
-interface BadgeProps {
+export type BadgeVariant = "pink" | "lavender" | "mint" | "yellow" | "peach";
+
+export interface BadgeProps {
   children: React.ReactNode;
-  variant?: "pink" | "lavender" | "mint" | "yellow" | "peach";
+  variant?: BadgeVariant;
   className?: string;
 }
 
