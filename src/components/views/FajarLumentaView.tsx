@@ -3,65 +3,84 @@ import Link from "next/link";
 import { BirthdayLayout } from "@/components/layouts/BirthdayLayout";
 import { PageWrapper } from "@/components/layouts/PageWrapper";
 import { HeroSection } from "@/components/sections/HeroSection";
-import { GallerySection, PhotoItem } from "@/components/sections/GallerySection";
+import { PhotoSlideSection } from "@/components/sections/PhotoSlideSection";
+import { PhotoSlide } from "@/components/fragments/PhotoSlide";
 import { WishSection, WishItem } from "@/components/sections/WishSection";
 import { ConfettiParticle } from "@/components/elements/ConfettiParticle";
 import { MusicPlayer } from "@/components/fragments/MusicPlayer";
 
-const defaultPhotos: PhotoItem[] = [
+const defaultSlides: PhotoSlide[] = [
   {
     id: "1",
-    src: "/images/fajar/foto-01.svg",
-    alt: "Fajar Lumenta - Senyum Terbaik",
-    caption: "Senyum Penuh Energi",
-    subcaption: "Selalu bawa keceriaan di setiap suasana",
-    badgeText: "Favorit",
-    rotationClass: "rotate-[-1.5deg] hover:rotate-0",
+    src: "/images/fajar/1.jpg",
+    alt: "Fajar Lumenta - Sang Penatua Muda",
+    caption: "Sang Penatua Muda",
+    quote: "Kepemimpinan sejati lahir dari hati yang melayani.",
+    badge: {
+      icon: "🕊️",
+      label: "Penatua Pemuda",
+      variant: "lavender",
+    },
   },
   {
     id: "2",
-    src: "/images/fajar/foto-02.svg",
-    alt: "Fajar Lumenta - Momen Berharga",
-    caption: "Momen Spesial",
-    subcaption: "Kenangan indah yang selalu diingat",
-    badgeText: "Sweet",
-    rotationClass: "rotate-[1.5deg] hover:rotate-0",
+    src: "/images/fajar/2.jpg",
+    alt: "Fajar Lumenta - Di Balik Ketegasan",
+    caption: "Di Balik Ketegasan",
+    quote: "Guru terbaik bukan yang tak pernah marah, tapi yang marahnya penuh kasih.",
+    badge: {
+      icon: "📐",
+      label: "Guru Matematika",
+      variant: "yellow",
+    },
   },
   {
     id: "3",
-    src: "/images/fajar/foto-03.svg",
-    alt: "Fajar Lumenta - Petualangan Seru",
-    caption: "Langkah Petualangan",
-    subcaption: "Terus melangkah raih mimpi setinggi langit",
-    badgeText: "Spirit",
-    rotationClass: "rotate-[-2deg] hover:rotate-0",
+    src: "/images/fajar/3.jpg",
+    alt: "Fajar Lumenta - Momen Bersama",
+    caption: "Momen Bersama",
+    quote: "Hidup paling bermakna saat dirayakan bersama orang-orang yang kita cintai.",
+    badge: {
+      icon: "🎉",
+      label: "Momen Spesial",
+      variant: "mint",
+    },
   },
   {
     id: "4",
-    src: "/images/fajar/foto-04.svg",
-    alt: "Fajar Lumenta - Semangat Baru",
-    caption: "Cahaya Inspirasi",
-    subcaption: "Selalu jadi inspirasi bagi orang-orang sekitar",
-    badgeText: "Bright",
-    rotationClass: "rotate-[2deg] hover:rotate-0",
+    src: "/images/fajar/4.jpg",
+    alt: "Fajar Lumenta - Langkah Iman",
+    caption: "Langkah Iman",
+    quote: "Setiap tanggung jawab baru adalah kepercayaan Tuhan yang digenapkan.",
+    badge: {
+      icon: "✝️",
+      label: "Iman & Pelayanan",
+      variant: "pink",
+    },
   },
   {
     id: "5",
-    src: "/images/fajar/foto-05.svg",
-    alt: "Fajar Lumenta - Tawa Bahagia",
-    caption: "Tawa Paling Tulus",
-    subcaption: "Semoga tawa ini selalu menghiasi hari-harimu",
-    badgeText: "Joy",
-    rotationClass: "rotate-[-1deg] hover:rotate-0",
+    src: "/images/fajar/5.jpg",
+    alt: "Fajar Lumenta - Fajar yang Sesungguhnya",
+    caption: "Fajar yang Sesungguhnya",
+    quote: "Namamu bukan kebetulan — kamu memang selalu jadi awal dari hal-hal baik.",
+    badge: {
+      icon: "🌅",
+      label: "Fajar Baru",
+      variant: "peach",
+    },
   },
   {
     id: "6",
-    src: "/images/fajar/foto-06.svg",
-    alt: "Fajar Lumenta - Langkah Sukses",
-    caption: "Menatap Masa Depan",
-    subcaption: "Tahun baru dengan pencapaian yang kian gemilang",
-    badgeText: "Success",
-    rotationClass: "rotate-[1.5deg] hover:rotate-0",
+    src: "/images/fajar/6.jpg",
+    alt: "Fajar Lumenta - Selamat Ulang Tahun!",
+    caption: "Selamat Ulang Tahun!",
+    quote: "Semoga usiamu bertambah, ilmumu semakin tajam, dan hatimu tetap hangat.",
+    badge: {
+      icon: "🎂",
+      label: "HBD Fajar!",
+      variant: "pink",
+    },
   },
 ];
 
@@ -109,6 +128,7 @@ export default function FajarLumentaView() {
     <BirthdayLayout>
       <ConfettiParticle />
 
+      {/* Top section wrapped in PageWrapper */}
       <PageWrapper>
         {/* Navigation Bar Minimal */}
         <nav className="flex items-center justify-between pb-6 border-b border-pink-100/80">
@@ -125,10 +145,13 @@ export default function FajarLumentaView() {
 
         {/* Hero Section */}
         <HeroSection name="Fajar Lumenta" />
+      </PageWrapper>
 
-        {/* Gallery Section */}
-        <GallerySection photos={defaultPhotos} />
+      {/* Photo Slide Section - full-width scroll-snap outside PageWrapper */}
+      <PhotoSlideSection slides={defaultSlides} />
 
+      {/* Bottom section wrapped in PageWrapper */}
+      <PageWrapper>
         {/* Wish Section */}
         <WishSection wishes={defaultWishes} />
 
