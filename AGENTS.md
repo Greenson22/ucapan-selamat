@@ -13,7 +13,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 ## Struktur Folder Proyek
 
 Proyek ini menggunakan arsitektur **component-based** dengan semua source code di dalam `src/`.
-Baca juga: [`docs/fajar-birthday/PRD.md`](./docs/fajar-birthday/PRD.md) untuk spesifikasi produk lengkap.
+Baca juga: [`docs/fajar-birthday/photo-slides/PRD.md`](./docs/fajar-birthday/photo-slides/PRD.md) untuk spesifikasi produk lengkap.
 
 ### Struktur Direktori
 
@@ -42,9 +42,10 @@ ucapan-selamat/
 │
 └── docs/
     └── fajar-birthday/
-        ├── PRD.md                  ← Product Requirements Document
-        ├── SPEC.md                 ← Technical Specification
-        └── tickets/                ← Implementation Tickets
+        └── photo-slides/
+            ├── PRD.md              ← Product Requirements Document
+            ├── SPEC.md             ← Technical Specification
+            └── tickets/            ← Implementation Tickets
 ```
 
 ### Hierarki Komponen & Aturan Import

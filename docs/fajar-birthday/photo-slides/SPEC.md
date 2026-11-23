@@ -2,7 +2,7 @@
 
 > **Versi:** 1.0.0  
 > **Tanggal:** 2026-11-23  
-> **Referensi PRD:** `docs/fajar-birthday/PRD.md`  
+> **Referensi PRD:** `docs/fajar-birthday/photo-slides/PRD.md`  
 > **Status:** Ready for Implementation
 
 ---
