@@ -101,6 +101,44 @@
   animation: pulse-subtle 2.5s ease-in-out infinite;
 }
 
+@keyframes bounce-attention {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-10px) scale(1.04);
+  }
+  50% {
+    transform: translateY(0) scale(1);
+  }
+  70% {
+    transform: translateY(-5px) scale(1.02);
+  }
+}
+
+@keyframes radar-ripple {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1.28);
+    opacity: 0;
+  }
+}
+
+.animate-attention {
+  animation: bounce-attention 2s ease-in-out infinite;
+}
+
+.animate-radar {
+  animation: radar-ripple 2s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+}
+
 @keyframes slide-fade-in-up {
   0% {
     opacity: 0;
