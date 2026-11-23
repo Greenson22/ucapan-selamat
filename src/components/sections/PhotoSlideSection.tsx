@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 import { PhotoSlide, PhotoSlideItem } from "@/components/fragments/PhotoSlide";
+import { SlideNavigator } from "@/components/fragments/SlideNavigator";
 
 export interface PhotoSlideSectionProps {
   slides: PhotoSlideItem[];
@@ -43,25 +44,48 @@ export function PhotoSlideSection({ slides, onPhotoClick }: PhotoSlideSectionPro
     };
   }, [slides]);
 
+  const handleNavigate = useCallback((index: number) => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const slideElements = container.querySelectorAll<HTMLElement>("article[data-slide-id]");
+    const targetSlide = slideElements[index];
+
+    if (targetSlide) {
+      targetSlide.scrollIntoView({ behavior: "smooth" });
+      setActiveIndex(index);
+    }
+  }, []);
+
   return (
-    <section
-      ref={containerRef}
-      aria-label="Galeri Foto Fajar Lumenta"
-      className="w-full h-screen overflow-y-auto scroll-smooth snap-y snap-mandatory relative z-20 focus:outline-hidden"
-      style={{
-        scrollbarWidth: "none",
-        msOverflowStyle: "none",
-      }}
-    >
-      {slides.map((slide, index) => (
-        <PhotoSlide
-          key={slide.id}
-          slide={slide}
-          isActive={activeIndex === index}
-          priority={index === 0}
-          onPhotoClick={() => onPhotoClick?.(index)}
-        />
-      ))}
-    </section>
+    <div className="relative w-full">
+      <section
+        ref={containerRef}
+        aria-label="Galeri Foto Fajar Lumenta"
+        className="w-full h-screen overflow-y-auto scroll-smooth snap-y snap-mandatory relative z-20 focus:outline-hidden"
+        style={{
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
+        }}
+      >
+        {slides.map((slide, index) => (
+          <PhotoSlide
+            key={slide.id}
+            slide={slide}
+            isActive={activeIndex === index}
+            priority={index === 0}
+            onPhotoClick={() => onPhotoClick?.(index)}
+          />
+        ))}
+      </section>
+
+      {/* Vertical Dot Navigator */}
+      <SlideNavigator
+        total={slides.length}
+        activeIndex={activeIndex}
+        captions={slides.map((s) => s.caption)}
+        onNavigate={handleNavigate}
+      />
+    </div>
   );
 }
