@@ -15,7 +15,7 @@ export function ConfettiParticle() {
   const [particles, setParticles] = useState<Particle[]>([]);
 
   useEffect(() => {
-    const colors = ["#FFB3C6", "#C9B1E8", "#B2F0D6", "#FFF0A3", "#FFCBA4", "#BEE1E6"];
+    const colors = ["#5C2D9A", "#7B4FC4", "#A97DE8", "#D4A017", "#F5D76E", "#EDE3FA"];
     const generated: Particle[] = Array.from({ length: 32 }, (_, i) => ({
       id: i,
       left: `${Math.random() * 98}%`,

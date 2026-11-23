@@ -3,16 +3,38 @@
 :root {
   --font-pacifico: "Pacifico", cursive;
   --font-nunito: "Nunito", sans-serif;
-  
-  --pastel-pink: #FFB3C6;
-  --pastel-lavender: #C9B1E8;
-  --pastel-mint: #B2F0D6;
-  --pastel-yellow: #FFF0A3;
-  --pastel-peach: #FFCBA4;
-  --pastel-blue: #BEE1E6;
-  --text-dark: #3D2C52;
-  --text-muted: #7B6B9A;
-  --bg-soft: #FFF9FC;
+
+  /* === Pemuda GMIM Color Palette === */
+  /* Ungu utama — warna sayap & tulisan "PEMUDA GMIM" */
+  --gmim-purple-deep:   #3B1A6B;   /* ungu tua, latar splash & header */
+  --gmim-purple:        #5C2D9A;   /* ungu utama brand */
+  --gmim-purple-mid:    #7B4FC4;   /* ungu medium, aksen interaktif */
+  --gmim-purple-light:  #A97DE8;   /* ungu terang, hover & soft bg */
+  --gmim-purple-pale:   #EDE3FA;   /* ungu pucat, card/panel bg */
+
+  /* Emas / Kuning keemasan — aksen kemuliaan Pemuda GMIM */
+  --gmim-gold:          #D4A017;   /* emas sejati */
+  --gmim-gold-light:    #F5D76E;   /* emas terang, tombol & badge */
+  --gmim-gold-pale:     #FDF3CD;   /* emas pucat, card bg */
+
+  /* Netral & teks */
+  --gmim-white:         #FEFDFB;   /* putih gading */
+  --gmim-text-dark:     #1E0E3C;   /* teks utama, hampir hitam-ungu */
+  --gmim-text-mid:      #5C3A91;   /* teks sekunder, ungu medium */
+  --gmim-text-muted:    #9B82C4;   /* teks tersier, caption */
+  --gmim-bg:            #F5F0FF;   /* background halaman */
+  --gmim-bg-dark:       #100828;   /* background splash/dark section */
+
+  /* Alias lama (tetap tersedia untuk komponen yang belum dimigrasi) */
+  --pastel-pink:        #C9B1E8;
+  --pastel-lavender:    #A97DE8;
+  --pastel-mint:        #B2F0D6;
+  --pastel-yellow:      #F5D76E;
+  --pastel-peach:       #D4A017;
+  --pastel-blue:        #EDE3FA;
+  --text-dark:          #1E0E3C;
+  --text-muted:         #9B82C4;
+  --bg-soft:            #F5F0FF;
 }
 
 @theme {

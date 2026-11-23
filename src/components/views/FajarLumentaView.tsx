@@ -22,7 +22,7 @@ const defaultSlides: PhotoSlideItem[] = [
     badge: {
       icon: "🕊️",
       label: "Penatua Pemuda",
-      variant: "lavender",
+      variant: "purple",
     },
   },
   {
@@ -35,7 +35,7 @@ const defaultSlides: PhotoSlideItem[] = [
     badge: {
       icon: "📐",
       label: "Guru Matematika",
-      variant: "yellow",
+      variant: "gold",
     },
   },
   {
@@ -49,7 +49,7 @@ const defaultSlides: PhotoSlideItem[] = [
     badge: {
       icon: "🎉",
       label: "Momen Spesial",
-      variant: "mint",
+      variant: "lavender",
     },
   },
   {
@@ -63,7 +63,7 @@ const defaultSlides: PhotoSlideItem[] = [
     badge: {
       icon: "✝️",
       label: "Iman & Pelayanan",
-      variant: "pink",
+      variant: "purple",
     },
   },
   {
@@ -77,7 +77,7 @@ const defaultSlides: PhotoSlideItem[] = [
     badge: {
       icon: "🌅",
       label: "Fajar Baru",
-      variant: "peach",
+      variant: "gold",
     },
   },
   {
@@ -91,7 +91,7 @@ const defaultSlides: PhotoSlideItem[] = [
     badge: {
       icon: "🎂",
       label: "HBD Fajar!",
-      variant: "pink",
+      variant: "purple",
     },
   },
 ];
@@ -128,15 +128,15 @@ export default function FajarLumentaView() {
           {/* Top section wrapped in PageWrapper */}
           <PageWrapper>
             {/* Navigation Bar Minimal */}
-            <nav className="flex items-center justify-between pb-6 border-b border-pink-100/80">
+            <nav className="flex items-center justify-between pb-6 border-b border-[#A97DE8]/30">
               <Link
                 href="/happy-birthday"
-                className="inline-flex items-center gap-2 text-xs md:text-sm font-bold text-[#7B6B9A] hover:text-[#3D2C52] transition-colors"
+                className="inline-flex items-center gap-2 text-xs md:text-sm font-bold text-[#5C2D9A] hover:text-[#3B1A6B] transition-colors"
               >
                 ← Kembali ke Daftar Ucapan
               </Link>
-              <span className="font-pacifico text-sm md:text-base text-[#D94F70]">
-                Fajar&apos;s Birthday 🎂
+              <span className="font-pacifico text-sm md:text-base text-[#D4A017]">
+                Fajar&apos;s Birthday 🕊️🎂
               </span>
             </nav>
 
@@ -149,13 +149,13 @@ export default function FajarLumentaView() {
 
           {/* Footer */}
           <PageWrapper>
-            <footer className="mt-16 pt-8 border-t border-pink-100 text-center text-xs md:text-sm text-[#7B6B9A] pb-10">
+            <footer className="mt-16 pt-8 border-t border-[#A97DE8]/30 text-center text-xs md:text-sm text-[#7B4FC4] pb-10">
               <p>
                 Dibuat dengan cinta dan penuh doa untuk{" "}
-                <span className="font-bold text-[#3D2C52]">Fajar Lumenta</span>.
+                <span className="font-bold text-[#3B1A6B]">Fajar Lumenta</span>.
               </p>
-              <p className="mt-1 text-xs text-[#7B6B9A]/80">
-                © 2026 Ucapan Selamat Digital.
+              <p className="mt-1 text-xs text-[#9B82C4]">
+                © 2026 Ucapan Selamat Digital — Pemuda GMIM.
               </p>
             </footer>
           </PageWrapper>

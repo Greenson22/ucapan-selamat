@@ -30,14 +30,14 @@ export function HeroSection({
       </div>
 
       <div className="max-w-3xl mx-auto flex flex-col items-center gap-4">
-        <Badge variant="pink" className="animate-pulse-subtle">
+        <Badge variant="gold" className="animate-pulse-subtle">
           🎂 {birthdate}
         </Badge>
 
         <Typography
           as="h1"
           variant="heading"
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight md:leading-normal text-transparent bg-clip-text bg-gradient-to-r from-[#D94F70] via-[#854DAB] to-[#489379] px-2 py-1"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight md:leading-normal text-transparent bg-clip-text bg-gradient-to-r from-[#3B1A6B] via-[#7B4FC4] to-[#D4A017] px-2 py-1"
         >
           Happy Birthday,
           <br />
@@ -47,15 +47,15 @@ export function HeroSection({
         <Typography
           as="p"
           variant="body"
-          className="text-base sm:text-lg md:text-xl text-[#5B4775] max-w-xl mx-auto font-semibold mt-2"
+          className="text-base sm:text-lg md:text-xl text-[#5C2D9A] max-w-xl mx-auto font-semibold mt-2"
         >
           {subtitle}
         </Typography>
 
         {/* Cake celebration banner */}
-        <div className="mt-4 inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-white/80 backdrop-blur-xs border border-pink-100 shadow-sm">
+        <div className="mt-4 inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-white/80 backdrop-blur-xs border border-[#A97DE8]/30 shadow-sm">
           <span className="text-3xl">🎂</span>
-          <p className="font-nunito text-xs sm:text-sm font-bold text-[#3D2C52]">
+          <p className="font-nunito text-xs sm:text-sm font-bold text-[#1E0E3C]">
             Tiup lilinnya &amp; panjatkan harapan terbaikmu hari ini! ✨
           </p>
         </div>
