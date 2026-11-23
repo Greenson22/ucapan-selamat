@@ -1,15 +1,27 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { MusicToggleButton } from "@/components/elements/MusicToggleButton";
 
-interface MusicPlayerProps {
+export interface MusicPlayerProps {
   src?: string;
+  autoPlay?: boolean;
 }
 
-export function MusicPlayer({ src = "/audio/happy-birthday.mp3" }: MusicPlayerProps) {
+export function MusicPlayer({ src = "/audio/happy-birthday.mp3", autoPlay = false }: MusicPlayerProps) {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    if (autoPlay && audioRef.current) {
+      audioRef.current.play()
+        .then(() => setIsPlaying(true))
+        .catch((err) => {
+          console.warn("Audio autoplay error:", err);
+          setIsPlaying(false);
+        });
+    }
+  }, [autoPlay]);
 
   const toggleMusic = async () => {
     if (!audioRef.current) return;

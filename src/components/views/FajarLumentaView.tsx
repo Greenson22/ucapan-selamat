@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState, useCallback } from "react";
 import Link from "next/link";
 import { BirthdayLayout } from "@/components/layouts/BirthdayLayout";
 import { PageWrapper } from "@/components/layouts/PageWrapper";
@@ -6,6 +8,7 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { PhotoSlideSection, PhotoSlideItem } from "@/components/sections/PhotoSlideSection";
 import { ConfettiParticle } from "@/components/elements/ConfettiParticle";
 import { MusicPlayer } from "@/components/fragments/MusicPlayer";
+import { SplashScreen } from "@/components/fragments/SplashScreen";
 
 const defaultSlides: PhotoSlideItem[] = [
   {
@@ -94,47 +97,70 @@ const defaultSlides: PhotoSlideItem[] = [
 ];
 
 export default function FajarLumentaView() {
+  const [splashDone, setSplashDone] = useState(false);
+
+  const handleStart = useCallback(() => {
+    setSplashDone(true);
+  }, []);
+
   return (
-    <BirthdayLayout>
-      <ConfettiParticle />
+    <>
+      {/* Splash Screen — tampil di depan saat splashDone = false */}
+      {!splashDone && (
+        <SplashScreen name="Fajar Lumenta" onStart={handleStart} />
+      )}
 
-      {/* Top section wrapped in PageWrapper */}
-      <PageWrapper>
-        {/* Navigation Bar Minimal */}
-        <nav className="flex items-center justify-between pb-6 border-b border-pink-100/80">
-          <Link
-            href="/happy-birthday"
-            className="inline-flex items-center gap-2 text-xs md:text-sm font-bold text-[#7B6B9A] hover:text-[#3D2C52] transition-colors"
-          >
-            ← Kembali ke Daftar Ucapan
-          </Link>
-          <span className="font-pacifico text-sm md:text-base text-[#D94F70]">
-            Fajar&apos;s Birthday 🎂
-          </span>
-        </nav>
+      {/* Konten utama — selalu di-mount agar transisi mulus dan SEO ramah */}
+      <div
+        className={`transition-opacity duration-700 ${
+          splashDone ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+        aria-hidden={!splashDone}
+      >
+        <BirthdayLayout>
+          <ConfettiParticle />
 
-        {/* Hero Section */}
-        <HeroSection name="Fajar Lumenta" />
-      </PageWrapper>
+          {/* Top section wrapped in PageWrapper */}
+          <PageWrapper>
+            {/* Navigation Bar Minimal */}
+            <nav className="flex items-center justify-between pb-6 border-b border-pink-100/80">
+              <Link
+                href="/happy-birthday"
+                className="inline-flex items-center gap-2 text-xs md:text-sm font-bold text-[#7B6B9A] hover:text-[#3D2C52] transition-colors"
+              >
+                ← Kembali ke Daftar Ucapan
+              </Link>
+              <span className="font-pacifico text-sm md:text-base text-[#D94F70]">
+                Fajar&apos;s Birthday 🎂
+              </span>
+            </nav>
 
-      {/* Photo Slide Section - full-width scroll-snap outside PageWrapper */}
-      <PhotoSlideSection slides={defaultSlides} />
+            {/* Hero Section */}
+            <HeroSection name="Fajar Lumenta" />
+          </PageWrapper>
 
-      {/* Footer */}
-      <PageWrapper>
-        <footer className="mt-16 pt-8 border-t border-pink-100 text-center text-xs md:text-sm text-[#7B6B9A] pb-10">
-          <p>
-            Dibuat dengan cinta dan penuh doa untuk{" "}
-            <span className="font-bold text-[#3D2C52]">Fajar Lumenta</span>.
-          </p>
-          <p className="mt-1 text-xs text-[#7B6B9A]/80">
-            © 2026 Ucapan Selamat Digital.
-          </p>
-        </footer>
-      </PageWrapper>
+          {/* Photo Slide Section - full-width scroll-snap outside PageWrapper */}
+          <PhotoSlideSection slides={defaultSlides} />
 
-      {/* Floating Music Player */}
-      <MusicPlayer src="/audio/happy-birthday.mp3" />
-    </BirthdayLayout>
+          {/* Footer */}
+          <PageWrapper>
+            <footer className="mt-16 pt-8 border-t border-pink-100 text-center text-xs md:text-sm text-[#7B6B9A] pb-10">
+              <p>
+                Dibuat dengan cinta dan penuh doa untuk{" "}
+                <span className="font-bold text-[#3D2C52]">Fajar Lumenta</span>.
+              </p>
+              <p className="mt-1 text-xs text-[#7B6B9A]/80">
+                © 2026 Ucapan Selamat Digital.
+              </p>
+            </footer>
+          </PageWrapper>
+
+          {/* Floating Music Player otomatis memutar lagu saat splashDone = true */}
+          {splashDone && (
+            <MusicPlayer src="/audio/happy-birthday.mp3" autoPlay={true} />
+          )}
+        </BirthdayLayout>
+      </div>
+    </>
   );
 }
