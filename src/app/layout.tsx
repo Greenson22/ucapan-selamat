@@ -16,10 +16,12 @@ const nunito = Nunito({
   display: "swap",
 });
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  "https://ucapan-selamat-gules.vercel.app";
+
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
-  ),
+  metadataBase: new URL(siteUrl),
   title: "Ucapan Selamat | Kartu Ucapan Digital Spesial",
   description: "Platform ucapan selamat ulang tahun interaktif, estetik, dan personal.",
   icons: {
