@@ -4,12 +4,12 @@ import { BirthdayLayout } from "@/components/layouts/BirthdayLayout";
 import { PageWrapper } from "@/components/layouts/PageWrapper";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { PhotoSlideSection } from "@/components/sections/PhotoSlideSection";
-import { PhotoSlide } from "@/components/fragments/PhotoSlide";
+import { PhotoSlideItem } from "@/components/elements/PhotoSlideTypes";
 import { WishSection, WishItem } from "@/components/sections/WishSection";
 import { ConfettiParticle } from "@/components/elements/ConfettiParticle";
 import { MusicPlayer } from "@/components/fragments/MusicPlayer";
 
-const defaultSlides: PhotoSlide[] = [
+const defaultSlides: PhotoSlideItem[] = [
   {
     id: "1",
     src: "/images/fajar/1.jpg",

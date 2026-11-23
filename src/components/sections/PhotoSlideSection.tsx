@@ -12,8 +12,7 @@ export interface PhotoSlideSectionProps {
 export function PhotoSlideSection({ slides }: PhotoSlideSectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState<number>(0);
-  const [lightboxOpen, setLightboxOpen] = useState<boolean>(false);
-  const [lightboxIndex, setLightboxIndex] = useState<number>(0);
+  const [activeLightboxIndex, setActiveLightboxIndex] = useState<number | null>(null);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -59,12 +58,11 @@ export function PhotoSlideSection({ slides }: PhotoSlideSectionProps) {
   }, []);
 
   const handlePhotoClick = useCallback((index: number) => {
-    setLightboxIndex(index);
-    setLightboxOpen(true);
+    setActiveLightboxIndex(index);
   }, []);
 
   const handleCloseLightbox = useCallback(() => {
-    setLightboxOpen(false);
+    setActiveLightboxIndex(null);
   }, []);
 
   return (
@@ -100,8 +98,8 @@ export function PhotoSlideSection({ slides }: PhotoSlideSectionProps) {
       {/* Photo Lightbox */}
       <PhotoLightbox
         slides={slides}
-        initialIndex={lightboxIndex}
-        isOpen={lightboxOpen}
+        initialIndex={activeLightboxIndex ?? 0}
+        isOpen={activeLightboxIndex !== null}
         onClose={handleCloseLightbox}
       />
     </div>

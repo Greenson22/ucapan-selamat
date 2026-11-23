@@ -1,23 +1,10 @@
 import React from "react";
 import Image from "next/image";
-import { Badge, BadgeVariant } from "@/components/elements/Badge";
+import { Badge } from "@/components/elements/Badge";
 import { Typography } from "@/components/elements/Typography";
+import { PhotoSlideItem } from "@/components/elements/PhotoSlideTypes";
 
-export interface PhotoSlideItem {
-  id: string;
-  src: string;
-  alt: string;
-  caption: string;
-  quote: string;
-  badge: {
-    icon: string;
-    label: string;
-    variant: BadgeVariant;
-  };
-}
-
-export type PhotoSlide = PhotoSlideItem;
-export type PhotoSlideData = PhotoSlideItem;
+export type { PhotoSlideItem, PhotoSlideData } from "@/components/elements/PhotoSlideTypes";
 
 export interface PhotoSlideProps {
   slide: PhotoSlideItem;

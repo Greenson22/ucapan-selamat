@@ -2,7 +2,9 @@
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
-import { PhotoSlideItem } from "@/components/fragments/PhotoSlide";
+import { PhotoSlideItem } from "@/components/elements/PhotoSlideTypes";
+
+const SWIPE_THRESHOLD_PX = 50;
 
 export interface PhotoLightboxProps {
   slides: PhotoSlideItem[];
@@ -65,10 +67,10 @@ export function PhotoLightbox({
     const touchEndX = e.changedTouches[0].clientX;
     const deltaX = touchEndX - touchStartXRef.current;
 
-    if (deltaX > 50) {
+    if (deltaX > SWIPE_THRESHOLD_PX) {
       // Swiped right -> previous photo
       handlePrev();
-    } else if (deltaX < -50) {
+    } else if (deltaX < -SWIPE_THRESHOLD_PX) {
       // Swiped left -> next photo
       handleNext();
     }
