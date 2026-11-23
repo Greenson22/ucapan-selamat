@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState, useCallback } from "react";
-import Link from "next/link";
+import React, { useState, useCallback, useRef, useEffect } from "react";
 import { BirthdayLayout } from "@/components/layouts/BirthdayLayout";
-import { PageWrapper } from "@/components/layouts/PageWrapper";
 import { HeroSection } from "@/components/sections/HeroSection";
-import { PhotoSlideSection, PhotoSlideItem } from "@/components/sections/PhotoSlideSection";
+import { PhotoSlide } from "@/components/fragments/PhotoSlide";
+import { SlideNavigator } from "@/components/fragments/SlideNavigator";
+import { PhotoLightbox } from "@/components/fragments/PhotoLightbox";
+import { PhotoSlideItem } from "@/components/sections/PhotoSlideSection";
 import { ConfettiParticle } from "@/components/elements/ConfettiParticle";
 import { MusicPlayer } from "@/components/fragments/MusicPlayer";
 import { SplashScreen } from "@/components/fragments/SplashScreen";
@@ -98,14 +99,72 @@ const defaultSlides: PhotoSlideItem[] = [
 
 export default function FajarLumentaView() {
   const [splashDone, setSplashDone] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [lightboxOpen, setLightboxOpen] = useState<boolean>(false);
+  const [lightboxIndex, setLightboxIndex] = useState<number>(0);
 
   const handleStart = useCallback(() => {
     setSplashDone(true);
   }, []);
 
+  // IntersectionObserver to track currently visible section (Hero = 0, Photo 1 = 1, ... Photo 6 = 6)
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container || !splashDone) return;
+
+    const sections = container.querySelectorAll<HTMLElement>("article[data-slide-id]");
+    if (sections.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = Array.from(sections).indexOf(entry.target as HTMLElement);
+            if (index !== -1) {
+              setActiveIndex(index);
+            }
+          }
+        });
+      },
+      {
+        root: container,
+        threshold: 0.55,
+      }
+    );
+
+    sections.forEach((el) => observer.observe(el));
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [splashDone]);
+
+  const handleNavigate = useCallback((index: number) => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const sections = container.querySelectorAll<HTMLElement>("article[data-slide-id]");
+    const target = sections[index];
+
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+      setActiveIndex(index);
+    }
+  }, []);
+
+  const handlePhotoClick = useCallback((index: number) => {
+    setLightboxIndex(index);
+    setLightboxOpen(true);
+  }, []);
+
+  const handleCloseLightbox = useCallback(() => {
+    setLightboxOpen(false);
+  }, []);
+
   return (
     <>
-      {/* Splash Screen — tampil di depan saat splashDone = false */}
+      {/* Splash Screen */}
       {!splashDone && (
         <SplashScreen
           name="Fajar Lumenta"
@@ -115,7 +174,7 @@ export default function FajarLumentaView() {
         />
       )}
 
-      {/* Konten utama — selalu di-mount agar transisi mulus dan SEO ramah */}
+      {/* Konten utama terpadu dalam satu scroll snap container */}
       <div
         className={`transition-opacity duration-700 ${
           splashDone ? "opacity-100" : "opacity-0 pointer-events-none"
@@ -125,42 +184,73 @@ export default function FajarLumentaView() {
         <BirthdayLayout>
           <ConfettiParticle />
 
-          {/* Top section wrapped in PageWrapper */}
-          <PageWrapper>
-            {/* Navigation Bar Minimal */}
-            <nav className="flex items-center justify-between pb-6 border-b border-[#A97DE8]/30">
-              <Link
-                href="/happy-birthday"
-                className="inline-flex items-center gap-2 text-xs md:text-sm font-bold text-[#5C2D9A] hover:text-[#3B1A6B] transition-colors"
-              >
-                ← Kembali ke Daftar Ucapan
-              </Link>
-              <span className="font-pacifico text-sm md:text-base text-[#D4A017]">
-                Fajar&apos;s Birthday 🕊️🎂
-              </span>
-            </nav>
+          {/* Unified Scroll-Snap Container */}
+          <main
+            ref={containerRef}
+            aria-label="Ucapan Ulang Tahun Fajar Lumenta"
+            className="w-full h-screen overflow-y-auto scroll-smooth snap-y snap-mandatory relative z-20 focus:outline-hidden"
+            style={{
+              scrollbarWidth: "none",
+              msOverflowStyle: "none",
+            }}
+          >
+            {/* Slide 0: Hero Section */}
+            <HeroSection
+              name="Fajar Lumenta"
+              onExploreClick={() => handleNavigate(1)}
+            />
 
-            {/* Hero Section */}
-            <HeroSection name="Fajar Lumenta" />
-          </PageWrapper>
+            {/* Slide 1 - 6: Foto Kenangan */}
+            {defaultSlides.map((slide, index) => (
+              <PhotoSlide
+                key={slide.id}
+                slide={slide}
+                isActive={activeIndex === index + 1}
+                priority={index === 0}
+                onPhotoClick={() => handlePhotoClick(index)}
+              />
+            ))}
 
-          {/* Photo Slide Section - full-width scroll-snap outside PageWrapper */}
-          <PhotoSlideSection slides={defaultSlides} />
-
-          {/* Footer */}
-          <PageWrapper>
-            <footer className="mt-16 pt-8 border-t border-[#A97DE8]/30 text-center text-xs md:text-sm text-[#7B4FC4] pb-10">
-              <p>
+            {/* Footer Section */}
+            <article
+              data-slide-id="footer"
+              className="w-full snap-end flex flex-col justify-center items-center py-12 px-4 text-center border-t border-[#A97DE8]/30 bg-white/40 backdrop-blur-xs"
+            >
+              <p className="text-xs md:text-sm text-[#7B4FC4] max-w-md mx-auto">
                 Dibuat dengan cinta dan penuh doa untuk{" "}
                 <span className="font-bold text-[#3B1A6B]">Fajar Lumenta</span>.
               </p>
-              <p className="mt-1 text-xs text-[#9B82C4]">
+              <p className="mt-2 text-xs text-[#9B82C4]">
                 © 2026 Ucapan Selamat Digital — Pemuda GMIM.
               </p>
-            </footer>
-          </PageWrapper>
+              <button
+                type="button"
+                onClick={() => handleNavigate(0)}
+                className="mt-6 inline-flex items-center gap-1.5 text-xs font-bold text-[#5C2D9A] hover:text-[#3B1A6B] bg-white/80 border border-[#A97DE8]/30 px-4 py-2 rounded-full shadow-xs transition-colors"
+              >
+                ↑ Kembali ke Awal
+              </button>
+            </article>
+          </main>
 
-          {/* Floating Music Player otomatis memutar lagu saat splashDone = true */}
+          {/* Vertical Dot Navigator */}
+          <SlideNavigator
+            total={defaultSlides.length}
+            activeIndex={activeIndex}
+            captions={defaultSlides.map((s) => s.caption)}
+            onNavigate={handleNavigate}
+            showHero={true}
+          />
+
+          {/* Photo Lightbox */}
+          <PhotoLightbox
+            slides={defaultSlides}
+            initialIndex={lightboxIndex}
+            isOpen={lightboxOpen}
+            onClose={handleCloseLightbox}
+          />
+
+          {/* Floating Music Player */}
           {splashDone && (
             <MusicPlayer src="/audio/count-on-me.mp3" autoPlay={true} />
           )}
