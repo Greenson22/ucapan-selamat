@@ -162,7 +162,7 @@ export default function FajarLumentaView() {
 
           {/* Floating Music Player otomatis memutar lagu saat splashDone = true */}
           {splashDone && (
-            <MusicPlayer src="/audio/happy-birthday.mp3" autoPlay={true} />
+            <MusicPlayer src="/audio/count-on-me.mp3" autoPlay={true} />
           )}
         </BirthdayLayout>
       </div>
