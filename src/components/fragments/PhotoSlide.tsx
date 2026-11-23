@@ -1,10 +1,5 @@
-import React from "react";
-import Image from "next/image";
-import { Badge } from "@/components/elements/Badge";
-import { Typography } from "@/components/elements/Typography";
-import { PhotoSlideItem } from "@/components/elements/PhotoSlideTypes";
-
-export type { PhotoSlideItem, PhotoSlideData } from "@/components/elements/PhotoSlideTypes";
+import { BadgeVariant } from "@/components/elements/Badge";
+import { PhotoSlideItem } from "@/components/sections/PhotoSlideSection";
 
 export interface PhotoSlideProps {
   slide: PhotoSlideItem;
@@ -12,6 +7,15 @@ export interface PhotoSlideProps {
   priority?: boolean;
   onPhotoClick?: () => void;
 }
+
+export type { PhotoSlideItem };
+export type PhotoSlide = PhotoSlideItem;
+export type PhotoSlideData = PhotoSlideItem;
+
+import React from "react";
+import Image from "next/image";
+import { Badge } from "@/components/elements/Badge";
+import { Typography } from "@/components/elements/Typography";
 
 export function PhotoSlide({ slide, isActive = false, priority = false, onPhotoClick }: PhotoSlideProps) {
   return (

@@ -1,9 +1,23 @@
 "use client";
 
 import React, { useRef, useState, useEffect, useCallback } from "react";
-import { PhotoSlide, PhotoSlideItem } from "@/components/fragments/PhotoSlide";
+import { BadgeVariant } from "@/components/elements/Badge";
+import { PhotoSlide } from "@/components/fragments/PhotoSlide";
 import { SlideNavigator } from "@/components/fragments/SlideNavigator";
 import { PhotoLightbox } from "@/components/fragments/PhotoLightbox";
+
+export interface PhotoSlideItem {
+  id: string;
+  src: string;
+  alt: string;
+  caption: string;
+  quote: string;
+  badge: {
+    icon: string;
+    label: string;
+    variant: BadgeVariant;
+  };
+}
 
 export interface PhotoSlideSectionProps {
   slides: PhotoSlideItem[];
@@ -12,7 +26,8 @@ export interface PhotoSlideSectionProps {
 export function PhotoSlideSection({ slides }: PhotoSlideSectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState<number>(0);
-  const [activeLightboxIndex, setActiveLightboxIndex] = useState<number | null>(null);
+  const [lightboxOpen, setLightboxOpen] = useState<boolean>(false);
+  const [lightboxIndex, setLightboxIndex] = useState<number>(0);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -54,15 +69,17 @@ export function PhotoSlideSection({ slides }: PhotoSlideSectionProps) {
 
     if (targetSlide) {
       targetSlide.scrollIntoView({ behavior: "smooth" });
+      setActiveIndex(index);
     }
   }, []);
 
   const handlePhotoClick = useCallback((index: number) => {
-    setActiveLightboxIndex(index);
+    setLightboxIndex(index);
+    setLightboxOpen(true);
   }, []);
 
   const handleCloseLightbox = useCallback(() => {
-    setActiveLightboxIndex(null);
+    setLightboxOpen(false);
   }, []);
 
   return (
@@ -98,8 +115,8 @@ export function PhotoSlideSection({ slides }: PhotoSlideSectionProps) {
       {/* Photo Lightbox */}
       <PhotoLightbox
         slides={slides}
-        initialIndex={activeLightboxIndex ?? 0}
-        isOpen={activeLightboxIndex !== null}
+        initialIndex={lightboxIndex}
+        isOpen={lightboxOpen}
         onClose={handleCloseLightbox}
       />
     </div>

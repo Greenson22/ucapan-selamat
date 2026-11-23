@@ -2,32 +2,34 @@
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
-import { PhotoSlideItem } from "@/components/elements/PhotoSlideTypes";
+import { PhotoSlideItem } from "@/components/sections/PhotoSlideSection";
 
 const SWIPE_THRESHOLD_PX = 50;
 
 export interface PhotoLightboxProps {
   slides: PhotoSlideItem[];
-  initialIndex?: number;
+  initialIndex: number;
   isOpen: boolean;
   onClose: () => void;
 }
 
 export function PhotoLightbox({
   slides,
-  initialIndex = 0,
+  initialIndex,
   isOpen,
   onClose,
 }: PhotoLightboxProps) {
   const [currentIndex, setCurrentIndex] = useState<number>(initialIndex);
   const touchStartXRef = useRef<number | null>(null);
 
-  // Sync internal currentIndex with initialIndex when lightbox opens
-  useEffect(() => {
+  // Sync internal currentIndex with initialIndex without flash
+  const [prevOpen, setPrevOpen] = useState<boolean>(isOpen);
+  if (isOpen !== prevOpen) {
+    setPrevOpen(isOpen);
     if (isOpen) {
       setCurrentIndex(initialIndex);
     }
-  }, [isOpen, initialIndex]);
+  }
 
   const handlePrev = useCallback(() => {
     setCurrentIndex((prev) => (prev > 0 ? prev - 1 : slides.length - 1));
@@ -68,10 +70,8 @@ export function PhotoLightbox({
     const deltaX = touchEndX - touchStartXRef.current;
 
     if (deltaX > SWIPE_THRESHOLD_PX) {
-      // Swiped right -> previous photo
       handlePrev();
     } else if (deltaX < -SWIPE_THRESHOLD_PX) {
-      // Swiped left -> next photo
       handleNext();
     }
     touchStartXRef.current = null;
@@ -103,7 +103,7 @@ export function PhotoLightbox({
             onClose();
           }}
           aria-label="Tutup tampilan penuh (Escape)"
-          className="pointer-events-auto p-2 text-white/80 hover:text-white bg-black/40 hover:bg-black/60 rounded-full transition-colors text-xl leading-none w-10 h-10 flex items-center justify-center focus:outline-hidden focus:ring-2 focus:ring-pink-300"
+          className="pointer-events-auto p-2 text-white/80 hover:text-white bg-black/40 hover:bg-black/60 rounded-full transition-colors text-xl leading-none w-10 h-10 flex items-center justify-center focus:outline-hidden focus:ring-2 focus:ring-[#FFB3C6]"
         >
           ✕
         </button>
@@ -117,23 +117,21 @@ export function PhotoLightbox({
           handlePrev();
         }}
         aria-label="Foto sebelumnya"
-        className="absolute left-3 md:left-6 z-50 p-3 text-white/80 hover:text-white bg-black/40 hover:bg-black/70 rounded-full transition-colors text-2xl leading-none flex items-center justify-center focus:outline-hidden focus:ring-2 focus:ring-pink-300"
+        className="absolute left-3 md:left-6 z-50 p-3 text-white/80 hover:text-white bg-black/40 hover:bg-black/70 rounded-full transition-colors text-2xl leading-none flex items-center justify-center focus:outline-hidden focus:ring-2 focus:ring-[#FFB3C6]"
       >
         ‹
       </button>
 
       {/* Photo Area */}
-      <div
-        onClick={(e) => e.stopPropagation()}
-        className="relative w-[90vw] md:w-[85vw] h-[80vh] flex items-center justify-center select-none"
-      >
+      <div className="relative max-w-[90vw] max-h-[85vh] w-full h-full flex items-center justify-center pointer-events-none select-none">
         <Image
           src={currentSlide.src}
           alt={currentSlide.alt}
           fill
           priority
           sizes="90vw"
-          className="object-contain object-center drop-shadow-2xl"
+          onClick={(e) => e.stopPropagation()}
+          className="object-contain object-center drop-shadow-2xl pointer-events-auto"
         />
       </div>
 
@@ -145,7 +143,7 @@ export function PhotoLightbox({
           handleNext();
         }}
         aria-label="Foto selanjutnya"
-        className="absolute right-3 md:right-6 z-50 p-3 text-white/80 hover:text-white bg-black/40 hover:bg-black/70 rounded-full transition-colors text-2xl leading-none flex items-center justify-center focus:outline-hidden focus:ring-2 focus:ring-pink-300"
+        className="absolute right-3 md:right-6 z-50 p-3 text-white/80 hover:text-white bg-black/40 hover:bg-black/70 rounded-full transition-colors text-2xl leading-none flex items-center justify-center focus:outline-hidden focus:ring-2 focus:ring-[#FFB3C6]"
       >
         ›
       </button>
