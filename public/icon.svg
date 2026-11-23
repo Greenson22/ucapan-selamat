@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="100%" height="100%">
+  <!-- Background circular badge in soft pastel purple -->
+  <circle cx="32" cy="32" r="30" fill="#FCE7F3" stroke="#F472B6" stroke-width="2"/>
+  
+  <!-- Cake Base -->
+  <rect x="14" y="36" width="36" height="18" rx="4" fill="#FFB3C6" stroke="#DB2777" stroke-width="1.5" />
+  
+  <!-- Cake Frosting Drips -->
+  <path d="M14 42 C17 46, 21 46, 24 42 C27 46, 31 46, 34 42 C37 46, 41 46, 44 42 C47 46, 50 44, 50 42 L50 36 L14 36 Z" fill="#FFF0A3" />
+  
+  <!-- Cake Middle / Top layer -->
+  <rect x="19" y="25" width="26" height="12" rx="3" fill="#C9B1E8" stroke="#7C3AED" stroke-width="1.5" />
+  <path d="M19 30 C22 33, 25 33, 27 30 C29 33, 33 33, 35 30 C37 33, 41 33, 45 30 L45 25 L19 25 Z" fill="#B2F0D6" />
+
+  <!-- Single Birthday Candle -->
+  <rect x="30" y="16" width="4" height="9" rx="1.5" fill="#FDE047" stroke="#CA8A04" stroke-width="1" />
+  
+  <!-- Candle Flame -->
+  <path d="M32 9 C30 12, 29 14, 32 16 C35 14, 34 12, 32 9 Z" fill="#F97316" />
+  <circle cx="32" cy="14" r="1.5" fill="#FEF08A" />
+
+  <!-- Celebration sparkles / stars -->
+  <path d="M12 18 L13 21 L16 22 L13 23 L12 26 L11 23 L8 22 L11 21 Z" fill="#FBBF24" />
+  <path d="M50 16 L51 18 L53 19 L51 20 L50 22 L49 20 L47 19 L49 18 Z" fill="#F472B6" />
+</svg>
