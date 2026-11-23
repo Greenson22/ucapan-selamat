@@ -107,7 +107,12 @@ export default function FajarLumentaView() {
     <>
       {/* Splash Screen — tampil di depan saat splashDone = false */}
       {!splashDone && (
-        <SplashScreen name="Fajar Lumenta" onStart={handleStart} />
+        <SplashScreen
+          name="Fajar Lumenta"
+          photoSrc="/images/fajar/1.jpg"
+          photoAlt="Fajar Lumenta"
+          onStart={handleStart}
+        />
       )}
 
       {/* Konten utama — selalu di-mount agar transisi mulus dan SEO ramah */}
